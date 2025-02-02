@@ -3,6 +3,10 @@ kind: Deployment
 metadata:
   name: frontend
   namespace: default
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: frontend=maheshkumars772/frontend
+    argocd-image-updater.argoproj.io/update-strategy: latest
+    argocd-image-updater.argoproj.io/write-back-method: git
 spec:
   replicas: 1
   selector:
@@ -15,6 +19,6 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: maheshkumars772/frontend:latest  # Auto-updated by ArgoCD Image Updater
+          image: maheshkumars772/frontend:latest
           ports:
             - containerPort: 3000
